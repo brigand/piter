@@ -1,5 +1,17 @@
 type IntoIter<T> = { [Symbol.asyncIterator]: () => AsyncIterator<T> };
 
+async function raceSplice(promises: Array<Promise<unknown>>) {
+  const index = await Promise.race(
+    promises.map((p, i) =>
+      p.then(
+        () => i,
+        () => i,
+      ),
+    ),
+  );
+  promises.splice(index, 1);
+}
+
 export async function mapAsync<T, U>(
   iter: IntoIter<T>,
   callback: (value: T, index: number) => Promise<U>,
@@ -18,8 +30,8 @@ export async function mapAsync<T, U>(
       throw error[0];
     }
 
-    if (running.length >= concurrency) {
-      await Promise.race(running);
+    while (running.length >= concurrency) {
+      await raceSplice(running);
     }
 
     const promise = Promise.resolve()
