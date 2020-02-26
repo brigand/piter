@@ -39,14 +39,9 @@ export async function mapAsync<T, U>(
         running = running.filter((p) => p !== promise);
       });
 
-    (promise as any).index = index;
     running.push(promise);
   }
 
-  for (const [i, p] of running.entries()) {
-    console.log((p as any).index);
-    await p;
-  }
   await Promise.all(running);
 
   if (error) {
