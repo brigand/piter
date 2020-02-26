@@ -1,6 +1,6 @@
 {
   "name": "piter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "paginated (and optionally parallel) iterator over anything",
   "main": "lib/index.js",
   "scripts": {
