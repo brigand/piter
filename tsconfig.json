@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "outDir": "./lib",
+    "lib": ["ESNext", "dom"],
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "strict": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "types": ["node", "jest"]
+  },
+  "include": ["./src/"],
+  "exclude": ["./src/__docs__", "./src/__tests__"]
+}
